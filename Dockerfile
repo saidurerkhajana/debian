@@ -1,4 +1,4 @@
-FROM debian:11-slim
+FROM debian:10-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV NVM_DIR=/root/.nvm

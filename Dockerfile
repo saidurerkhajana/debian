@@ -20,13 +20,18 @@ RUN sed -i \
 
 RUN echo "root:root6767" | chpasswd
 
+# Download and install NVM
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.6/install.sh | bash
 
+# Install Node.js 22
 RUN . "$NVM_DIR/nvm.sh" && \
-    nvm install 24 && \
-    nvm alias default 24 && \
+    nvm install 22
+
+# Install PM2
+RUN . "$NVM_DIR/nvm.sh" && \
     npm install -g pm2
 
-ENV PATH="/root/.nvm/versions/node/v24.18.0/bin:$PATH"
+# Make Node.js and npm available
+ENV PATH="/root/.nvm/versions/node/v22.23.2/bin:$PATH"
 
 CMD ["sleep", "infinity"]

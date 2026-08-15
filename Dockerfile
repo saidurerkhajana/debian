@@ -1,4 +1,4 @@
-FROM debian:11
+FROM debian:11-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV NVM_DIR=/root/.nvm
@@ -8,13 +8,9 @@ RUN apt update && \
     nano \
     wget \
     curl \
-    gnupg \
-    ca-certificates \
-    git \
-    dropbear \
-    openssh-sftp-server \
     passwd && \
-    apt clean
+    apt clean && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN echo "root:root6767" | chpasswd
 
@@ -29,4 +25,4 @@ RUN . "$NVM_DIR/nvm.sh" && \
 
 ENV PATH="/root/.nvm/versions/node/v24.18.0/bin:$PATH"
 
-CMD ["sh", "-c", "pm2 start $(which dropbear) --name sshd -- -F && pm2 logs"]
+CMD ["sleep", "infinity"]
